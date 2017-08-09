@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -69,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
 
         registerReceiver(myReceiver, new IntentFilter(MyFirebaseMessagingService.INTENT_FILTER));
 
+        sendSavedToken();
+    }
+
+    private void sendSavedToken() {
+        SharedPreferences prefs = getSharedPreferences("TOKEN", MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+        if (token != null) {
+            sendRequest(REG_TOKEN, token);
+//            Log.d("DERP", token);
+        }
     }
 
     @Override
@@ -112,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
             url += "/"+param;
         }
 
-        RequestQueue queue = Volley.newRequestQueue(this);
         final Context me = this;
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+
+        VolleyMgr.sendGetRequest(this, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -123,18 +134,18 @@ public class MainActivity extends AppCompatActivity {
                         else sendRequest(EVENTS, null);
                     }
                 }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Log.d("derp", "Can't connect");
-                }else {
-                    Log.d("derp", String.valueOf(error.networkResponse.statusCode));
-                }
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                            Log.d("derp", "Can't connect");
+                        }else {
+                            Log.d("derp", String.valueOf(error.networkResponse.statusCode));
+                        }
 
-                Toast.makeText(me, "Network error", Toast.LENGTH_SHORT).show();
-            }
-        });
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+                        Toast.makeText(me, "Network error", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
     }
 }

@@ -1,5 +1,6 @@
 package com.arcompware.doornotifiercontroller;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -30,10 +31,18 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
         sendRegistrationToServer(refreshedToken);
+        saveTokenToSharedPrefs(refreshedToken);
+    }
+
+    private void saveTokenToSharedPrefs(String refreshedToken) {
+        SharedPreferences.Editor editor = getSharedPreferences("TOKEN", MODE_PRIVATE).edit();
+        editor.putString("token", refreshedToken);
+        editor.apply();
     }
 
     private void sendRegistrationToServer(String refreshedToken) {
         //TODO: send to service
+
 
         String url = String.format(
                 "http://%s:%s/regtoken/%s",
