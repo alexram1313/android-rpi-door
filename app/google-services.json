@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "373308189314",
+    "firebase_url": "https://doorsms-ad793.firebaseio.com",
+    "project_id": "doorsms-ad793",
+    "storage_bucket": "doorsms-ad793.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373308189314:android:348098a82ecb35e0",
+        "android_client_info": {
+          "package_name": "com.arcompware.doornotifiercontroller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373308189314-5u9aquhabc2pc094pbs9h44dv9438pr9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arcompware.doornotifiercontroller",
+            "certificate_hash": "7649c0e6f3a86bdfe560373a9295f1727482e642"
+          }
+        },
+        {
+          "client_id": "373308189314-imjugmfnmk63m21qpibjg2kpe1p0n747.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAtLzujB_EJAVwI6KIqoOPkOwwmu7yPLo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373308189314-imjugmfnmk63m21qpibjg2kpe1p0n747.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
